@@ -267,9 +267,9 @@ function openStream(username, platform, streamurl, status, profilePicture, userT
       
 		  streamerType = "twStreamer"
 			streamDiv.innerHTML = `
-			<iframe id="stream_embed" src="https://player.twitch.tv/?channel=${username}&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="527" width="937"></iframe>`
+			<iframe id="stream_embed" src="https://player.twitch.tv/?channel=${username}&parent=allinonelive.onrender.com" frameborder="0" allowfullscreen="true" scrolling="no" height="527" width="937"></iframe>`
 		
-			chatDiv.innerHTML = `<iframe  id="chat_embed"  src="https://www.twitch.tv/embed/${username}/chat?parent=localhost&darkpopout"  height="100%"  width="100%"></iframe>`
+			chatDiv.innerHTML = `<iframe  id="chat_embed"  src="https://www.twitch.tv/embed/${username}/chat?parent=allinonelive.onrender.com&darkpopout"  height="100%"  width="100%"></iframe>`
 		}
 	
 	}
