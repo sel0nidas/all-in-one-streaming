@@ -150,8 +150,12 @@
 	<script>
 		var list = document.getElementById("listOfStreamers");
 		//var arrayOfStreamers = [{id: "csnaber", platform: "youtube", title:"Can Sungur ve Yakın Evren"}]
-	
-		var arrayOfStreamers = JSON.parse(localStorage.getItem('arrayOfStreamers'));
+		if(localStorage.getItem('arrayOfStreamers') == null){
+
+		var arrayOfStreamers = [];
+		localStorage.setItem('arrayOfStreamers', JSON.stringify(arrayOfStreamers));
+		}
+		arrayOfStreamers = JSON.parse(localStorage.getItem('arrayOfStreamers'));
 		var status;
 		var streamURL;
 		var result;
