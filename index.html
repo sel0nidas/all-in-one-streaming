@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+	</head>
+  <body>
+    <script src="script.js"></script>
+	<style>
+		.username{
+			white-space: nowrap;
+      		overflow: hidden;
+      		text-overflow: ellipsis;
+		}
+		h6{
+			margin-bottom: 0 !important;
+		}
+		.row{
+			margin-left: 0 !important;
+			margin-right: 0 !important;
+		}
+		.img-grayscale{
+			filter: gray; /* IE6-9 */
+			-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+			filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+		}
+		iframe{
+			border: 0 !important;
+		}
+		.scroll-container::-webkit-scrollbar {
+		  width: 10px; /* Adjust width as desired */
+		}
+
+		.scroll-container::-webkit-scrollbar-track {
+		  background-color: #e0e0e0; /* Adjust color as desired */
+		}
+
+		.scroll-container::-webkit-scrollbar-thumb {
+		  background-color: #888888; /* Adjust color as desired */
+		}
+
+		.streamerLink{
+			color: white;
+			font-size: large;
+			font-weight: bold;
+		}
+		.streamerLink:hover{
+			color: white !important;
+			text-decoration: underline;
+		}
+		.twStreamer{
+			text-decoration-color: #9147ff !important;
+		}
+		.ytStreamer{
+			text-decoration-color: #ff0000 !important;
+		}
+		.twStreamerimg:hover{
+			border: 3px solid #9147ff !important;
+		}
+		.ytStreamerimg:hover{
+			border: 3px solid #ff0000 !important;
+		}
+		.profileImg{
+			border-radius: 3rem;
+			border: 3px solid transparent;
+		}
+
+		/*
+		.remove-btn{
+			position: absolute;
+			right: 0px;
+			height: 100%;
+			display: none;
+		}
+		#listOfStreamers>li{
+			position: relative;
+		}
+		#listOfStreamers>li:hover>.remove-btn{
+			display: block;
+		}*/
+	</style>
+    <!--<ul id="ul"></ul>-->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="padding-right: 16px;" aria-modal="true" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalCenterTitle">Yeni Yayıncı Ekle</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<form id="addStreamerForm">
+					<div class="form-group">
+						<h6 class="mt-2">Örnek Format: https://www.youtube.com/@channelname</h6>
+						<input type="text" class="form-control mt-4" id="streamerInput" placeholder="Yayıncının Profil Linkini Giriniz">
+					  </div>
+					  <!--
+					<input type="text" id="streamerInput" class="form-control" placeholder="Yayıncı Linkini Giriniz">
+					  -->
+				</form>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<div class="row" style="width: 100%; height: 100vh;">
+		<div class="col-md-2 bg-dark p-2 pt-4" style="height: 100vh;">
+			<button id="csnaber" class="btn btn-dark w-100 col-md-12 row p-3" style="display: flex;" platform="youtube" data-toggle="modal" data-target="#exampleModalCenter">
+				<div class="col-md-2 p-0"><i class="fas fa-plus"></i>
+				</div>
+				<div class="col-md-10" style="display: flex; align-items: center; height: 100%;">
+					<h6>Yeni Yayıncı Ekle</h6>
+				</div>
+			</button>
+
+			<hr>
+			<ul id="listOfStreamers" class="text-light scroll-container" style="list-style-type: none; padding-inline: 0; height: 80vh; overflow-y: auto;">
+				<!--
+				<li id="csnaber" class="row" platform="youtube">
+					<button id="csnaber" onclick="openStream('csnaber')" class="btn btn-dark w-100 col-md-12 row" style="display: flex;" platform="youtube">
+						<div class="col-md-2 p-0">
+							<img class="w-100 h-100 rounded-circle" src="https://yt3.googleusercontent.com/ytc/AGIKgqM9zv1KH0i65dxEMnzcgv2nHl9rhjRt0QZCeieyEQ=s176-c-k-c0x00ffffff-no-rj" alt="">
+						</div>
+						<div class="col-md-7" style="display: flex; align-items: center; height: 100%;">
+							<h6>Can Sungur</h6>
+						</div>
+						<div class="col-md-3" style="display: flex; align-items: center; height: 100%;">
+							<h6>offline</h6>
+						</div>
+					</button>
+				</li>-->
+			</ul>
+		</div>
+		<div class="col-md-10 row p-2" style="width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; border-left:1px solid #000;">
+			<div id="stream-bloque" class="col-md-9">
+				<iframe id="stream_embed" width="937" height="527" src="https://www.youtube.com/embed/xrf_RbM_MNk" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			</div>
+			<div id="chat-bloque" class="col-md-3 p-0" style="height: 100%;">
+				<iframe id="chat_embed" width="100%" height="100%" src="https://www.youtube.com/live_chat?v=xrf_RbM_MNk&embed_domain=localhost&dark_theme=1" frameborder="0"></iframe>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var list = document.getElementById("listOfStreamers");
+		//var arrayOfStreamers = [{id: "csnaber", platform: "youtube", title:"Can Sungur ve Yakın Evren"}]
+	
+		var arrayOfStreamers = JSON.parse(localStorage.getItem('arrayOfStreamers'));
+		var status;
+		var streamURL;
+		var result;
+		/*
+		arrayOfStreamers.splice(index,1);
+		localStorage.setItem('arrayOfStreamers', JSON.stringify(arrayOfStreamers));
+		arrayOfStreamers = JSON.parse(localStorage.getItem('arrayOfStreamers'));
+		*/
+		console.log(arrayOfStreamers)
+		var addStreamerForm = document.getElementById("addStreamerForm");
+		addStreamerForm.addEventListener('submit', function (e) {
+			e.preventDefault();
+			var streamerInput = document.getElementById("streamerInput");
+			
+			var channelUrl = new URL(streamerInput.value);
+			var hostname = channelUrl.hostname;
+			var platform;
+			if(hostname == "www.youtube.com")
+				platform = "youtube";
+			else
+				platform = "twitch"
+			
+			var username;
+			var color;
+			if(platform == "youtube"){
+				username = channelUrl.pathname;
+				username = username.replace("/","");
+				username = username.replace("@","");
+				color = "#FF0000"
+			}
+			else if(platform == "twitch"){
+				username = getTwitchStreamerUsername(streamerInput.value)
+				color = "#9147ff";
+			}
+			alert(username)
+			
+
+			var li = document.createElement("li");
+				(async () => {
+					if(platform == "youtube"){
+						userResult = await getYtChannelProfilePicture(username);
+						console.log(userResult)
+						result = await getYtChannelStatus(username);
+					}
+					else if(platform == "twitch"){
+						userResult = await getTwChannelProfilePicture(username);
+						console.log(userResult)
+						result = await getTwChannelStatus(username);
+					}
+					
+					//localStorage.setItem('arrayOfStreamers', JSON.stringify(arrayOfStreamers));
+
+					var object = {id: username, platform: platform, title: userResult.title, profilePicture: userResult.profilePicture}
+					arrayOfStreamers.push(object);
+					localStorage.setItem('arrayOfStreamers', JSON.stringify(arrayOfStreamers));
+					console.log(arrayOfStreamers)
+					console.log(result);
+					console.log(result.online);
+					if(result.online == true){
+						status = "🔴";
+						streamURL = result.stream;
+					}
+					else
+						status = "offline";
+
+						userResult.title = truncateString(userResult.title,20);
+				li.innerHTML = `
+				<button id="${username}" onclick="openStream('${username}', '${platform}','${ streamURL}', '${result.online}', '${userResult.profilePicture}', '${userResult.title}', '${result.streamTitle}')" class="btn btn-dark w-100 col-md-12 row" style="display: flex; border-left: 4px solid ${color}; border-top-left-radius: 0px; border-bottom-left-radius: 0px;" platform="youtube">
+					<div class="col-md-2 p-0">
+						<img class="w-100 h-100 rounded-circle" src="${userResult.profilePicture}" alt="">
+					</div>
+					<div class="col-md-7" style="display: flex; align-items: center; height: 100%;">
+						<h6 class="username">${userResult.title}</h6>
+					</div>
+					<div class="col-md-3" style="display: flex; align-items: center; height: 100%;">
+						<h6>${status}</h6>
+					</div>
+				</button>`
+				li.classList.add("row");
+				li.id = username;
+				li.setAttribute("platform", platform);
+				list.appendChild(li);
+				
+				})();
+
+		})
+		/*
+		streamerInput.addEventListener('keydown', function (e) {
+		  if (e.key === 'Enter') {
+		    e.preventDefault();
+		    addStreamerForm.submit();
+		  }
+		});
+		*/
+		window.onload = function () {
+			
+			
+			arrayOfStreamers.forEach(element=>{
+				var li = document.createElement("li");
+				var themeColor;
+				if(element.platform == "youtube"){
+					themeColor = "#FF0000";
+				}
+				else if(element.platform == "twitch"){
+					themeColor = "#9147ff";
+				}
+				(async () => {
+					
+					if(element.platform == "youtube"){
+						result = await getYtChannelStatus(element.id);
+					}
+					else if(element.platform == "twitch"){
+						result = await getTwChannelStatus(element.id);
+					}
+					
+					console.log(result);
+					console.log(result.online);
+					if(result.online == true){
+						status = "🔴";
+						streamURL = result.stream;
+					}
+					else
+						status = "offline";
+
+				li.innerHTML = `
+				<button id="csnaber" onclick="openStream('${element.id}', '${element.platform}','${ streamURL}', '${result.online}', '${element.profilePicture}', '${element.title}', '${result.streamTitle}')" class="btn btn-dark w-100 col-md-12 row" style="display: flex; border-left: 4px solid ${themeColor}; border-top-left-radius: 0px; border-bottom-left-radius: 0px;" platform="youtube">
+					<div class="col-md-2 p-0">
+						<img class="w-100 h-100 rounded-circle" src="${element.profilePicture}" alt="">
+					</div>
+					<div class="col-md-7" style="display: flex; align-items: center; height: 100%;">
+						<h6 class="username">${element.title}</h6>
+					</div>
+					<div class="col-md-3" style="display: flex; align-items: center; height: 100%;">
+						<h6>${status}</h6>
+					</div>
+				</button>`
+				li.classList.add("row");
+				li.id = element.id;
+				li.setAttribute("platform", element.platform);
+				list.appendChild(li);
+				
+				})();
+			})
+			
+		}
+	</script>
+  </body>
+</html>
