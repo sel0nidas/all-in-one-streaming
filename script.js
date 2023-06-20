@@ -208,7 +208,7 @@ async function getYtChannelProfilePicture(channelId) {
   }
 
 async function getTwChannelProfilePicture(channelId) {
-	const apiUrl = `http://localhost:3000/twitch/${channelId}`;
+	const apiUrl = `/twitch/${channelId}`;
   
 	try {
 	  const response = await fetch(apiUrl);
