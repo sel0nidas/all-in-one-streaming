@@ -185,10 +185,10 @@ function getYouTubeVideoId(url) {
 	}
 }
 async function getYtChannelProfilePicture(channelId) {
-	const apiUrl = `http://localhost:3000/channel/${channelId}/profile-picture`;
+	//const apiUrl = `http://localhost:3000/channel/${channelId}/profile-picture`;
   
 	try {
-	  const response = await fetch(apiUrl);
+	  const response = await fetch(`/channel/${channelId}/profile-picture`);
 	  const data = await response.json();
 		
 	  if (data.profilePicture) {
