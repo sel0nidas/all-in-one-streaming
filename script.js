@@ -260,7 +260,7 @@ function openStream(username, platform, streamurl, status, profilePicture, userT
     	<iframe id="stream_embed" width="937" height="527" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     	`
 		
-		chatDiv.innerHTML = `<iframe id="chat_embed" width="100%" height="100%" src="https://www.youtube.com/live_chat?v=${videoId}&embed_domain=localhost&dark_theme=1" frameborder="0"></iframe>
+		chatDiv.innerHTML = `<iframe id="chat_embed" width="100%" height="100%" src="https://www.youtube.com/live_chat?v=${videoId}&embed_domain=allinonelive.onrender.com&dark_theme=1" frameborder="0"></iframe>
 		`
 		}
 		else if(platform == "twitch"){
